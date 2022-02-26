@@ -1,12 +1,13 @@
 name: Windows tests rust
 
 on:
-  pull_request:
-    paths:
-      - 'polars/**'
+  - push
+#  pull_request:
+#    paths:
+#      - 'polars/**'
 jobs:
   test-rust:
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install latest Rust nightly
@@ -16,4 +17,5 @@ jobs:
           override: true
       - name: Run tests
         run: |
-          cd polars && make test && make integration-tests
+          cargo clean
+          cd polars && cargo clean && make test && make integration-tests
